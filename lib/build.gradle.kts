@@ -13,7 +13,7 @@ plugins {
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
 
-    id("com.diffplug.gradle.spotless") version "6.19.0"
+    id("com.diffplug.spotless") version "6.16.0"
 }
 
 repositories {
@@ -53,6 +53,6 @@ java {
 spotless {
     scala {
         // version and configFile, scalaMajorVersion are all optional
-        scalafmt('3.7.4').configFile('.scalafmt.conf').scalaMajorVersion('2.12')
+        scalafmt("3.7.4").configFile("../.scalafmt.conf").scalaMajorVersion("2.12")
     }
 }
