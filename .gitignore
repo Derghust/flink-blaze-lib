@@ -68,3 +68,7 @@ project/plugins/project/
 .cache
 .lib/
 
+
+# Ignore Gradle build output directory
+build
+/.idea/
