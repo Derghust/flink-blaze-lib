@@ -8,9 +8,6 @@ import org.junit.runner.RunWith
 import org.scalatestplus.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class LibrarySuite extends AnyFunSuite {
-  test("someLibraryMethod is always true") {
-    def library = new Library()
-    assert(library.someLibraryMethod())
-  }
+class AsyncOperatorImpl extends AnyFunSuite {
+  // TODO Implement test for AsyncOperatorImpl with apache flink stream test
 }

@@ -14,7 +14,16 @@ plugins {
     `java-library`
 
     id("com.diffplug.spotless") version "6.16.0"
+    id("com.diffplug.spotless-changelog") version "3.0.2"
 }
+
+spotlessChangelog {
+    changelogFile("../CHANGELOG.md")
+}
+
+// In release date use spotless changelog
+//version = spotlessChangelog.versionLast
+version = "0.1.0"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -23,13 +32,14 @@ repositories {
 
 val scalaVersion = "2.12"
 val scalaPatchVersion = "17"
+val apacheFlinkVersion = "1.17.1"
 
 dependencies {
     // Use Scala 2.13 in our library project
-    implementation("org.scala-lang:scala-library:${scalaVersion}.${scalaPatchVersion}")
+    api("org.scala-lang:scala-library:${scalaVersion}.${scalaPatchVersion}")
 
     // Apache Flink
-    compileOnly("org.apache.flink:flink-streaming-scala_${scalaVersion}:1.17.1")
+    api("org.apache.flink:flink-streaming-scala_${scalaVersion}:${apacheFlinkVersion}")
 
     // Use Scalatest for testing our library
     testImplementation("junit:junit:4.13.2")
@@ -38,9 +48,6 @@ dependencies {
 
     // Need scala-xml at test runtime
     testRuntimeOnly("org.scala-lang.modules:scala-xml_${scalaVersion}:1.2.0")
-
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api("org.apache.commons:commons-math3:3.6.1")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -53,6 +60,6 @@ java {
 spotless {
     scala {
         // version and configFile, scalaMajorVersion are all optional
-        scalafmt("3.7.4").configFile("../.scalafmt.conf").scalaMajorVersion("2.12")
+        scalafmt("3.7.4").configFile("../.scalafmt.conf").scalaMajorVersion(scalaVersion)
     }
 }
