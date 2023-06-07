@@ -39,7 +39,7 @@ object IfOperatorImpl {
       if (state) {
         ds.map(function)
       } else {
-        ds[OUT]
+        ds.asInstanceOf[DataStream[OUT]]
       }
     }
 
@@ -63,7 +63,7 @@ object IfOperatorImpl {
       if (state) {
         ds.flatMap(function)
       } else {
-        ds[OUT]
+        ds.asInstanceOf[DataStream[OUT]]
       }
     }
 
@@ -152,7 +152,7 @@ object IfOperatorImpl {
       if (state) {
         ds.async(asyncFunction, orderType, timeout, timeUnit, capacity)
       } else {
-        ds[OUT]
+        ds.asInstanceOf[DataStream[OUT]]
       }
     }
 
@@ -204,7 +204,7 @@ object IfOperatorImpl {
           asyncRetryStrategy
         )
       } else {
-        ds[OUT]
+        ds.asInstanceOf[DataStream[OUT]]
       }
     }
   }
