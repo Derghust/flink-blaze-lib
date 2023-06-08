@@ -1,15 +1,7 @@
-package com.github.derghust.flinkblaze
+package com.github.derghust.flinkblaze.impl
 
-import com.github.derghust.flinkblaze.AsyncOperatorImpl.{
-  AsyncOperator,
-  AsyncOrderType,
-  AsyncOrderTypeWithRetry
-}
-import org.apache.flink.api.common.functions.{
-  FilterFunction,
-  FlatMapFunction,
-  MapFunction
-}
+import com.github.derghust.flinkblaze.impl.AsyncOperatorImpl.{AsyncOperator, AsyncOrderType, AsyncOrderTypeWithRetry}
+import org.apache.flink.api.common.functions.{FilterFunction, FlatMapFunction, MapFunction}
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.scala.DataStream
 import org.apache.flink.streaming.api.scala.async.{AsyncFunction, AsyncRetryStrategy}

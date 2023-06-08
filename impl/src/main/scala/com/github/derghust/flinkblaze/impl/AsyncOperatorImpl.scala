@@ -1,4 +1,4 @@
-package com.github.derghust.flinkblaze
+package com.github.derghust.flinkblaze.impl
 
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.scala.async.{AsyncFunction, AsyncRetryStrategy}
