@@ -5,6 +5,32 @@ the development experience of Apache Flink applications written in Scala.
 This repository provides a set of utility methods and functions specifically crafted 
 to assist developers in building clean and highly readable Flink applications.
 
+## Work in Progress
+
+Please note that the current repository is a work in progress. 
+The development of the Flink Blaze Library for Apache Flink is still ongoing, 
+and the features and functionalities provided may be incomplete or subject to change.
+
+While the library aims to provide a comprehensive set of utility methods and functions 
+for Apache Flink applications written in Scala, it is important to be aware that certain
+aspects may be under active development or refinement.
+
+We appreciate your understanding and patience as we continue to improve and expand 
+the Scala Utils for Apache Flink library. Your feedback, suggestions, and contributions 
+are highly valuable in shaping the future of this project.
+
+Please consider regularly checking the repository for updates, 
+as we aim to release stable versions that offer enhanced functionality, 
+improved performance, and comprehensive documentation. Stay tuned for the official release,
+where we will provide more stable and mature versions of the library.
+
+In the meantime, feel free to explore the existing codebase,
+experiment with the available utilities, and provide feedback to help us make the library
+more robust and user-friendly.
+
+Thank you for your interest in the Flink Blaze Library for Apache Flink application. 
+We look forward to your involvement in this work in progress.
+
 ## Key Features
 
 - Developer-Focused:
@@ -60,7 +86,8 @@ repositories {
 - Add the library dependency to your project by specifying its coordinates:
 ```kotlin
 dependencies {
-    implementation("com.github.derghust:flinkblaze:0.1.0")
+    implementation("com.github.derghust:flinkblaze-operator:0.1.0")
+    implementation("com.github.derghust:flinkblaze-impl:0.1.0")
     // ... other dependencies ...
 }
 ```

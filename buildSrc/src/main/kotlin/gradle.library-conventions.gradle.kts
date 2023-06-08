@@ -22,6 +22,9 @@ spotlessChangelog {
 }
 
 version = spotlessChangelog.versionLast
+if (version == "unspecified") {
+    version = spotlessChangelog.versionNext
+}
 
 tasks.jar {
     archiveFileName.set("flinkblaze-${project.name}-${project.version}.jar")
