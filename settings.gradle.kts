@@ -6,3 +6,4 @@ plugins {
 rootProject.name = "flink-blaze-lib"
 include("impl")
 include("operator")
+include("utils")
