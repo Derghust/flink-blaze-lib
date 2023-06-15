@@ -1,12 +1,8 @@
 package com.github.derghust.flinkblaze.impl
 
-import com.github.derghust.flinkblaze.operator.{
-  DeduplicationOperator,
-  FilterLeftOperator,
-  FilterRightOperator
-}
+import com.github.derghust.flinkblaze.operator.{DeduplicationOperator, FilterLeftOperator, FilterRightOperator}
 import org.apache.flink.api.common.typeinfo.TypeInformation
-import org.apache.flink.streaming.api.scala.DataStream
+import org.apache.flink.streaming.api.datastream.DataStream
 
 import scala.concurrent.duration.FiniteDuration
 

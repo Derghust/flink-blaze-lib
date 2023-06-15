@@ -2,7 +2,7 @@ plugins {
     id("gradle.library-conventions")
 
     id("gradle.scala-common-conventions")
-    id("gradle.scala-flink-conventions")
+    id("gradle.flink-common-conventions")
 }
 
 group = "com.github.derghust.flinkblaze.operator"

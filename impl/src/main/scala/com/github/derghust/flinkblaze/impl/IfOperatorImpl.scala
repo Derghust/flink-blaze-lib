@@ -11,8 +11,12 @@ import org.apache.flink.api.common.functions.{
   MapFunction
 }
 import org.apache.flink.api.common.typeinfo.TypeInformation
-import org.apache.flink.streaming.api.scala.DataStream
-import org.apache.flink.streaming.api.scala.async.{AsyncFunction, AsyncRetryStrategy}
+import org.apache.flink.api.java.functions.KeySelector
+import org.apache.flink.streaming.api.datastream.DataStream
+import org.apache.flink.streaming.api.functions.async.{
+  AsyncFunction,
+  AsyncRetryStrategy
+}
 
 import scala.concurrent.duration.TimeUnit
 
@@ -139,7 +143,7 @@ object IfOperatorImpl {
       * types) to be used with grouped operators like grouped reduce or grouped
       * aggregations only if state is true.
       *
-      * @param function
+      * @param keySelector
       *   to use.
       * @param state
       *   State from which will be decided if.
@@ -150,11 +154,11 @@ object IfOperatorImpl {
       *   is false return unchanged [[DataStream]].
       */
     def keyByIf[K: TypeInformation](
-        function: IN => K,
+        keySelector: KeySelector[IN, K],
         state: Boolean
     ): DataStream[IN] = {
       if (state) {
-        ds.keyBy(function)
+        ds.keyBy(keySelector)
       } else {
         ds
       }
