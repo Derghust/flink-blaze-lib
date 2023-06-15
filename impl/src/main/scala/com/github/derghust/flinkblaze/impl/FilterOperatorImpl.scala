@@ -1,6 +1,10 @@
 package com.github.derghust.flinkblaze.impl
 
-import com.github.derghust.flinkblaze.operator.DeduplicationOperator
+import com.github.derghust.flinkblaze.operator.{
+  DeduplicationOperator,
+  FilterEitherOperator
+}
+import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.scala.DataStream
 
 import scala.concurrent.duration.FiniteDuration
@@ -36,6 +40,26 @@ object FilterOperatorImpl {
       ds.filter(
         new DeduplicationOperator[IN, K](fun, maximumSize, expiration, countAccess)
       )
+    }
+  }
+
+  implicit class FilterEitherOperatorImpl[L: TypeInformation, R: TypeInformation](
+      ds: DataStream[Either[L, R]]
+  ) {
+
+    /** Wrap method [[FilterEitherOperator]] to [[DataStream]] with type of [[Either]]
+      * [[L]] and [[R]] filter operation that will help you simplify and clean your
+      * code. Filter function operator for filtering [[Either]] for left [[L]] side and
+      * right [[R]] side. Right side values will be retained and left side values will
+      * be filtered out.
+      *
+      * @tparam L
+      *   Either left side.
+      * @tparam R
+      *   Either right side
+      */
+    def filterEither(): DataStream[R] = {
+      ds.flatMap(new FilterEitherOperator[L, R]())
     }
   }
 }
