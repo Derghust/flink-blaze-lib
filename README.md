@@ -68,28 +68,7 @@ $ cd flink-blaze-lib
 ```
 3. Build the library using gradle:
 ```shell
-$ ./gradlew publishToMavenLocal
-```
-4. Include library to project
-To include the locally built and released version of the library in your project, 
-you can leverage the `gradle publishToMavenLocal` command to publish the library 
-artifacts to your local Maven repository. Follow these steps:
-
-- In your project's build configuration (e.g., `build.gradle`/`build.gradle.kts`), 
-add the local Maven repository as a dependency source:
-```kotlin
-repositories {
-    mavenLocal()
-    // ... other repositories ...
-}
-```
-- Add the library dependency to your project by specifying its coordinates:
-```kotlin
-dependencies {
-    implementation("com.github.derghust:flinkblaze-operator:0.1.0")
-    implementation("com.github.derghust:flinkblaze-impl:0.1.0")
-    // ... other dependencies ...
-}
+$ sbt package
 ```
 
 ## License
