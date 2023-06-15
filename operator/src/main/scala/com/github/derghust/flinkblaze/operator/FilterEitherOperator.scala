@@ -15,6 +15,6 @@ import org.apache.flink.util.Collector
 class FilterEitherOperator[L, R] extends FlatMapFunction[Either[L, R], R] {
 
   override def flatMap(value: Either[L, R], out: Collector[R]): Unit = {
-    value.map(r => out.collect(r))
+    value.map(out.collect)
   }
 }
