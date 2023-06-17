@@ -115,6 +115,7 @@ class IfOperatorImplTest extends AnyFlatSpec with Matchers with BeforeAndAfterAl
       expectedOutputTransformation should contain(result)
     })
 
+    env.execute("Operator Test")
   }
 
   "Disabled FlatMapIfE" should "not execute operator" in {
