@@ -3,9 +3,11 @@ ThisBuild / version := "0.1.0-SNAPSHOT"
 lazy val flinkVersion = "1.17.1"
 
 ThisBuild / libraryDependencies += "org.apache.flink" % "flink-streaming-java" % flinkVersion % "provided"
-ThisBuild / libraryDependencies += "org.apache.flink" % "flink-clients" % flinkVersion % "test"
+ThisBuild / libraryDependencies += "org.apache.flink" % "flink-clients" % flinkVersion % Test
 ThisBuild / libraryDependencies += "org.typelevel" %% "cats-core" % "2.9.0"
-ThisBuild / libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % "test"
+ThisBuild / libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test
+ThisBuild / libraryDependencies += "org.slf4j" % "slf4j-api" % "2.0.7" % Test
+ThisBuild / libraryDependencies += "org.slf4j" % "slf4j-simple" % "2.0.7" % Test
 
 lazy val scala_2_12 = "2.12.18"
 lazy val scala_2_13 = "2.13.11"
