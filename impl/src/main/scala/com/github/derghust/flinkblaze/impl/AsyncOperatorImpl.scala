@@ -43,7 +43,7 @@ object AsyncOperatorImpl {
       * @return
       *   the resulting stream containing the asynchronous results
       */
-    def async[OUT: TypeInformation](
+    def async[OUT](
         asyncFunction: AsyncFunction[IN, OUT],
         orderType: AsyncOrderType,
         timeout: Long,

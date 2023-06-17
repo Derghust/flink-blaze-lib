@@ -35,7 +35,7 @@ class AsyncOperatorImplTest extends AnyFlatSpec with Matchers with BeforeAndAfte
       AsyncOperatorImpl.Ordered,
       10,
       TimeUnit.SECONDS
-    )(TypeInformation.of(classOf[Int]), TypeInformation.of(classOf[Int]))
+    )(TypeInformation.of(classOf[Int]))
 
     resultStream.collectAsync().map { result =>
       expectedOutput should contain(result)

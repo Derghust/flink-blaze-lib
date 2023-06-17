@@ -24,8 +24,6 @@ class FilterOperatorImplTest extends AnyFlatSpec with Matchers with BeforeAndAft
   override def afterAll(): Unit = {}
 
   "IncrementAsyncFunction" should "increment the input by 1" in {
-    env = StreamExecutionEnvironment.getExecutionEnvironment
-
     val input: Either[Int, Int]   = Right(5)
     val expectedOutput: List[Int] = List(5)
 

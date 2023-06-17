@@ -21,7 +21,7 @@ import org.apache.flink.streaming.api.functions.async.{
 import scala.concurrent.duration.TimeUnit
 
 object IfOperatorImpl {
-  implicit class IfOperator[IN: TypeInformation](ds: DataStream[IN]) {
+  implicit class IfOperator[IN](ds: DataStream[IN]) {
 
     /** Creates a new DataStream by applying the given function to every element of this
       * DataStream only if state is true.
@@ -37,9 +37,9 @@ object IfOperatorImpl {
     def mapIf(
         function: MapFunction[IN, IN],
         state: Boolean
-    ): DataStream[IN] = {
+    )(implicit ti: TypeInformation[IN]): DataStream[IN] = {
       if (state) {
-        ds.map(function)
+        ds.map(function).returns(ti)
       } else {
         ds
       }
@@ -62,9 +62,9 @@ object IfOperatorImpl {
     def mapIfE[OUT: TypeInformation](
         function: MapFunction[IN, OUT],
         state: Boolean
-    ): Either[DataStream[IN], DataStream[OUT]] = {
+    )(implicit ti: TypeInformation[OUT]): Either[DataStream[IN], DataStream[OUT]] = {
       if (state) {
-        Right(ds.map(function))
+        Right(ds.map(function).returns(ti))
       } else {
         Left(ds)
       }
@@ -84,9 +84,9 @@ object IfOperatorImpl {
     def flatMapIf(
         function: FlatMapFunction[IN, IN],
         state: Boolean
-    ): DataStream[IN] = {
+    )(implicit ti: TypeInformation[IN]): DataStream[IN] = {
       if (state) {
-        ds.flatMap(function)
+        ds.flatMap(function).returns(ti)
       } else {
         ds
       }
@@ -110,9 +110,9 @@ object IfOperatorImpl {
     def flatMapIfE[OUT: TypeInformation](
         function: FlatMapFunction[IN, OUT],
         state: Boolean
-    ): Either[DataStream[IN], DataStream[OUT]] = {
+    )(implicit ti: TypeInformation[OUT]): Either[DataStream[IN], DataStream[OUT]] = {
       if (state) {
-        Right(ds.flatMap(function))
+        Right(ds.flatMap(function).returns(ti))
       } else {
         Left(ds)
       }
@@ -132,9 +132,9 @@ object IfOperatorImpl {
     def filterIf(
         function: FilterFunction[IN],
         state: Boolean
-    ): DataStream[IN] = {
+    )(implicit ti: TypeInformation[IN]): DataStream[IN] = {
       if (state) {
-        ds.filter(function)
+        ds.filter(function).returns(ti)
       } else {
         ds
       }
@@ -197,7 +197,7 @@ object IfOperatorImpl {
         timeUnit: TimeUnit,
         capacity: Int = 100,
         state: Boolean
-    ): DataStream[IN] = {
+    )(implicit ti: TypeInformation[IN]): DataStream[IN] = {
       if (state) {
         ds.async(asyncFunction, orderType, timeout, timeUnit, capacity)
       } else {
@@ -233,14 +233,14 @@ object IfOperatorImpl {
       *   [[DataStream]] side with [[OUT]] type information, otherwise if state is false
       *   return unchanged as [[Left]] [[DataStream]] with type information of [[OUT]].
       */
-    def asyncIfE[OUT: TypeInformation](
+    def asyncIfE[OUT](
         asyncFunction: AsyncFunction[IN, OUT],
         orderType: AsyncOrderType,
         timeout: Long,
         timeUnit: TimeUnit,
         capacity: Int = 100,
         state: Boolean
-    ): Either[DataStream[IN], DataStream[OUT]] = {
+    )(implicit ti: TypeInformation[OUT]): Either[DataStream[IN], DataStream[OUT]] = {
       if (state) {
         Right(ds.async(asyncFunction, orderType, timeout, timeUnit, capacity))
       } else {
@@ -283,7 +283,7 @@ object IfOperatorImpl {
         capacity: Int = 100,
         asyncRetryStrategy: AsyncRetryStrategy[IN],
         state: Boolean
-    ): DataStream[IN] = {
+    )(implicit ti: TypeInformation[IN]): DataStream[IN] = {
       if (state) {
         ds.asyncWithRetry(
           asyncFunction,
@@ -328,7 +328,7 @@ object IfOperatorImpl {
       *   [[DataStream]] side with [[OUT]] type information, otherwise if state is false
       *   return unchanged as [[Left]] [[DataStream]] with type information of [[OUT]].
       */
-    def asyncWithRetryIfE[OUT: TypeInformation](
+    def asyncWithRetryIfE[OUT](
         asyncFunction: AsyncFunction[IN, OUT],
         orderType: AsyncOrderTypeWithRetry,
         timeout: Long,
@@ -336,7 +336,7 @@ object IfOperatorImpl {
         capacity: Int = 100,
         asyncRetryStrategy: AsyncRetryStrategy[OUT],
         state: Boolean
-    ): Either[DataStream[IN], DataStream[OUT]] = {
+    )(implicit ti: TypeInformation[OUT]): Either[DataStream[IN], DataStream[OUT]] = {
       if (state) {
         Right(
           ds.asyncWithRetry(
