@@ -1,8 +1,6 @@
 package com.github.derghust.flinkblaze.impl
 
 import com.github.derghust.flinkblaze.impl.FilterOperatorImpl.FilterEitherOperatorImpl
-import com.github.derghust.flinkblaze.impl.FilterOperatorImpl.FilterOperator
-import com.github.derghust.flinkblaze.impl.operator.IncrementalAsyncOperator
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.datastream.DataStream
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
@@ -10,7 +8,6 @@ import org.scalatest.BeforeAndAfterAll
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
-import java.util.concurrent.TimeUnit
 import scala.collection.convert.ImplicitConversions.`iterator asScala`
 
 class FilterOperatorImplTest extends AnyFlatSpec with Matchers with BeforeAndAfterAll {

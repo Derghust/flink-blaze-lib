@@ -1,6 +1,6 @@
 package com.github.derghust.flinkblaze.impl
 
-import org.apache.flink.api.common.typeinfo.{TypeHint, TypeInformation, Types}
+import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.datastream.{AsyncDataStream, DataStream}
 import org.apache.flink.streaming.api.functions.async.{
   AsyncFunction,

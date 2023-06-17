@@ -6,13 +6,11 @@ import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.datastream.DataStream
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
 import org.scalatest.BeforeAndAfterAll
-import org.scalatest.enablers.Containing
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 import java.util.concurrent.TimeUnit
 import scala.collection.convert.ImplicitConversions.`iterator asScala`
-
 
 class AsyncOperatorImplTest extends AnyFlatSpec with Matchers with BeforeAndAfterAll {
 
@@ -25,7 +23,7 @@ class AsyncOperatorImplTest extends AnyFlatSpec with Matchers with BeforeAndAfte
   override def afterAll(): Unit = {}
 
   "IncrementAsyncFunction" should "increment the input by 1" in {
-    val input: Int          = 10
+    val input: Int                = 10
     val expectedOutput: List[Int] = List(input + 1)
 
     val ds: DataStream[Int] = env.fromElements(input)
