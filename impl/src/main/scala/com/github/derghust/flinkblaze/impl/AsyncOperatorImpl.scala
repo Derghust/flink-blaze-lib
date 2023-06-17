@@ -1,8 +1,11 @@
 package com.github.derghust.flinkblaze.impl
 
-import org.apache.flink.api.common.typeinfo.TypeInformation
+import org.apache.flink.api.common.typeinfo.{TypeHint, TypeInformation, Types}
 import org.apache.flink.streaming.api.datastream.{AsyncDataStream, DataStream}
-import org.apache.flink.streaming.api.functions.async.{AsyncFunction, AsyncRetryStrategy}
+import org.apache.flink.streaming.api.functions.async.{
+  AsyncFunction,
+  AsyncRetryStrategy
+}
 
 import scala.concurrent.duration.TimeUnit
 
@@ -46,12 +49,16 @@ object AsyncOperatorImpl {
         timeout: Long,
         timeUnit: TimeUnit,
         capacity: Int = 100
-    ): DataStream[OUT] = {
+    )(implicit ti: TypeInformation[OUT]): DataStream[OUT] = {
       orderType match {
         case Unordered =>
-          AsyncDataStream.unorderedWait(ds, asyncFunction, timeout, timeUnit, capacity)
+          AsyncDataStream
+            .unorderedWait(ds, asyncFunction, timeout, timeUnit, capacity)
+            .returns(ti)
         case Ordered =>
-          AsyncDataStream.orderedWait(ds, asyncFunction, timeout, timeUnit, capacity)
+          AsyncDataStream
+            .orderedWait(ds, asyncFunction, timeout, timeUnit, capacity)
+            .returns(ti)
       }
     }
 
@@ -79,33 +86,37 @@ object AsyncOperatorImpl {
       * @return
       *   the resulting stream containing the asynchronous results
       */
-    def asyncWithRetry[OUT: TypeInformation](
+    def asyncWithRetry[OUT](
         asyncFunction: AsyncFunction[IN, OUT],
         orderType: AsyncOrderTypeWithRetry,
         timeout: Long,
         timeUnit: TimeUnit,
         capacity: Int = 100,
         asyncRetryStrategy: AsyncRetryStrategy[OUT]
-    ): DataStream[OUT] = {
+    )(implicit ti: TypeInformation[OUT]): DataStream[OUT] = {
       orderType match {
         case UnorderedWithRetry =>
-          AsyncDataStream.unorderedWaitWithRetry(
-            ds,
-            asyncFunction,
-            timeout,
-            timeUnit,
-            capacity,
-            asyncRetryStrategy
-          )
+          AsyncDataStream
+            .unorderedWaitWithRetry(
+              ds,
+              asyncFunction,
+              timeout,
+              timeUnit,
+              capacity,
+              asyncRetryStrategy
+            )
+            .returns(ti)
         case OrderedWithRetry =>
-          AsyncDataStream.orderedWaitWithRetry(
-            ds,
-            asyncFunction,
-            timeout,
-            timeUnit,
-            capacity,
-            asyncRetryStrategy
-          )
+          AsyncDataStream
+            .orderedWaitWithRetry(
+              ds,
+              asyncFunction,
+              timeout,
+              timeUnit,
+              capacity,
+              asyncRetryStrategy
+            )
+            .returns(ti)
       }
     }
   }

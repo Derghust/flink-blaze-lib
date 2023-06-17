@@ -37,14 +37,14 @@ object FilterOperatorImpl {
         maximumSize: Int,
         expiration: Option[FiniteDuration],
         countAccess: Boolean = false
-    ): DataStream[IN] = {
+    )(implicit ti: TypeInformation[IN]): DataStream[IN] = {
       ds.filter(
         new DeduplicationOperator[IN, K](fun, maximumSize, expiration, countAccess)
-      )
+      ).returns(ti)
     }
   }
 
-  implicit class FilterEitherOperatorImpl[L: TypeInformation, R: TypeInformation](
+  implicit class FilterEitherOperatorImpl[L, R](
       ds: DataStream[Either[L, R]]
   ) {
 
@@ -59,8 +59,8 @@ object FilterOperatorImpl {
       * @tparam R
       *   Either right side
       */
-    def right(): DataStream[R] = {
-      ds.flatMap(new FilterRightOperator[L, R]())
+    def right()(implicit ti: TypeInformation[R]): DataStream[R] = {
+      ds.flatMap(new FilterRightOperator[L, R]()).returns(ti)
     }
 
     /** Wrap method [[FilterLeftOperator]] to [[DataStream]] with type of [[Either]]
@@ -74,8 +74,8 @@ object FilterOperatorImpl {
       * @tparam R
       *   Either right side
       */
-    def left(): DataStream[L] = {
-      ds.flatMap(new FilterLeftOperator[L, R]())
+    def left()(implicit ti: TypeInformation[L]): DataStream[L] = {
+      ds.flatMap(new FilterLeftOperator[L, R]()).returns(ti)
     }
   }
 }

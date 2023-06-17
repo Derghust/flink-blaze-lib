@@ -46,7 +46,7 @@ object IfOperatorImpl {
     }
 
     /** Creates a new DataStream by applying the given function to every element of this
-      * DataStream only if state is true.
+      * DataStream only if state is true. Capital E in the name represent Either type.
       *
       * @param function
       *   to use.
@@ -59,7 +59,7 @@ object IfOperatorImpl {
       *   [[DataStream]] side with [[OUT]] type information, otherwise if state is false
       *   return unchanged as [[Left]] [[DataStream]] with type information of [[OUT]].
       */
-    def mapIf[OUT: TypeInformation](
+    def mapIfE[OUT: TypeInformation](
         function: MapFunction[IN, OUT],
         state: Boolean
     ): Either[DataStream[IN], DataStream[OUT]] = {
@@ -93,7 +93,8 @@ object IfOperatorImpl {
     }
 
     /** Creates a new DataStream by applying the given function to every element and
-      * flattening the results only if state is true.
+      * flattening the results only if state is true. Capital E in the name represent
+      * Either type.
       *
       * @param function
       *   to use.
@@ -106,7 +107,7 @@ object IfOperatorImpl {
       *   [[DataStream]] side with [[OUT]] type information, otherwise if state is false
       *   return unchanged as [[Left]] [[DataStream]] with type information of [[OUT]].
       */
-    def flatMapIf[OUT: TypeInformation](
+    def flatMapIfE[OUT: TypeInformation](
         function: FlatMapFunction[IN, OUT],
         state: Boolean
     ): Either[DataStream[IN], DataStream[OUT]] = {
@@ -209,7 +210,7 @@ object IfOperatorImpl {
       * help you simplify and clean your code. Apply an asynchronous function on the
       * input data stream. The output order is only maintained with respect to
       * watermarks. Stream records which lie between the same two watermarks, can be
-      * re-ordered. Capital E at the end represent Either type.
+      * re-ordered. Capital E in the name represent Either type.
       *
       * @param asyncFunction
       *   to use.
@@ -302,7 +303,7 @@ object IfOperatorImpl {
       * help you simplify and clean your code. Apply an asynchronous function on the
       * input data stream. The output order is only maintained with respect to
       * watermarks. Stream records which lie between the same two watermarks, can be
-      * re-ordered. Capital E at the end represent Either type.
+      * re-ordered. Capital E in the name represent Either type.
       *
       * @param asyncFunction
       *   to use.
