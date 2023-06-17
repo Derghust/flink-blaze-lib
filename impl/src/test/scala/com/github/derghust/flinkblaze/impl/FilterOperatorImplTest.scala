@@ -20,7 +20,7 @@ class FilterOperatorImplTest extends AnyFlatSpec with Matchers with BeforeAndAft
 
   override def afterAll(): Unit = {}
 
-  "IncrementAsyncFunction" should "increment the input by 1" in {
+  "RightEitherFilter" should "return right" in {
     val input: Either[Int, Int]   = Right(5)
     val expectedOutput: List[Int] = List(5)
 
@@ -32,6 +32,21 @@ class FilterOperatorImplTest extends AnyFlatSpec with Matchers with BeforeAndAft
       expectedOutput should contain(result)
     }
 
-    env.execute("Async Operator Test")
+    env.execute("Operator Test")
+  }
+
+  "LeftEitherFilter" should "return right" in {
+    val input: Either[Int, Int] = Left(5)
+    val expectedOutput: List[Int] = List(5)
+
+    val ds: DataStream[Either[Int, Int]] = env.fromElements(input)
+
+    val resultStream = ds.left()(TypeInformation.of(classOf[Int]))
+
+    resultStream.collectAsync().map { result =>
+      expectedOutput should contain(result)
+    }
+
+    env.execute("Operator Test")
   }
 }
