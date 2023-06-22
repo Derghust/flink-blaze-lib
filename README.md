@@ -60,11 +60,11 @@ you can still leverage the library by cloning the repository and building it loc
 
 1. Clone the repository to your local machine:
 ```shell
-$ git clone https://github.com/Derghust/flink-blaze-lib.git
+$ git clone https://github.com/Derghust/blaze-extension-library.git
 ```
 2. Navigate to the cloned repository:
 ```shell
-$ cd flink-blaze-lib
+$ cd blaze-extension-library
 ```
 3. Build the library using gradle:
 ```shell
