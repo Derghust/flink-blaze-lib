@@ -1,6 +1,6 @@
-# Flink Blaze library
+# Blaze Extension library
 
-The Flink Blaze Library for Apache Flink is a comprehensive library designed to enhance
+The Blaze Extension library for Apache Flink is a comprehensive library designed to enhance
 the development experience of Apache Flink applications written in Scala. 
 This repository provides a set of utility methods and functions specifically crafted 
 to assist developers in building clean and highly readable Flink applications.
@@ -8,7 +8,7 @@ to assist developers in building clean and highly readable Flink applications.
 ## Work in Progress
 
 Please note that the current repository is a work in progress. 
-The development of the Flink Blaze Library for Apache Flink is still ongoing, 
+The development of the Blaze Extension library for Apache Flink is still ongoing, 
 and the features and functionalities provided may be incomplete or subject to change.
 
 While the library aims to provide a comprehensive set of utility methods and functions 
@@ -28,7 +28,7 @@ In the meantime, feel free to explore the existing codebase,
 experiment with the available utilities, and provide feedback to help us make the library
 more robust and user-friendly.
 
-Thank you for your interest in the Flink Blaze Library for Apache Flink application. 
+Thank you for your interest in the Blaze Extension library for Apache Flink application. 
 We look forward to your involvement in this work in progress.
 
 ## Key Features
@@ -54,7 +54,7 @@ Flink application development challenges efficiently.
 
 ## How to Use
 
-The Flink Blaze Library for Apache Flink library is currently under development 
+The Blaze Extension library for Apache Flink library is currently under development 
 and the official release has not yet been made. However, 
 you can still leverage the library by cloning the repository and building it locally.
 
@@ -73,6 +73,6 @@ $ sbt package
 
 ## License
 
-The Flink Blaze Library for Apache Flink is licensed under the MIT License, 
+The Blaze Extension library is licensed under the MIT License, 
 allowing you to freely use, modify, and distribute the library. 
 Please refer to the repository's LICENSE file for more details.
